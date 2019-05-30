@@ -5,6 +5,7 @@ import Heading from "./components/Heading";
 import TouristInfoCard from "./components/TouristInfoCard";
 import Footer from "./components/Footer";
 import SearchResults from "./components/SearchResults";
+import Restaurant from "./Restaurant";
 import Data from "./data/fakeBookings.json";
 import "./App.css";
 
@@ -46,6 +47,7 @@ class App extends Component {
           </div>
         </div>
         <Bookings />
+        <Restaurant />
         <SearchResults result={Data} />
         <Footer list={address} />
       </div>
