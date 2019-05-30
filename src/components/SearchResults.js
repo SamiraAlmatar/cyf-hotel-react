@@ -1,24 +1,42 @@
 import React from "react";
+import moment from "moment";
 const rowResult = props => {
   return (
-    <tr>
-      <td>{res.id}</td>
-      <td>{res.title}</td>
-      <td>{res.firstName}</td>
-      <td>{res.surname}</td>
-      <td>{res.email}</td>
-      <td>{res.roomId}</td>
-      <td>{res.checkIn}</td>
-      <td>{res.checkOut}</td>
+    <tr key={props.data.id}>
+      <td>{props.data.id}</td>
+      <td>{props.data.title}</td>
+      <td>{props.data.firstName}</td>
+      <td>{props.data.surname}</td>
+      <td>{props.data.email}</td>
+      <td>{props.data.roomId}</td>
+      <td>{props.data.checkInDate}</td>
+      <td>{props.data.checkOutDate}</td>
     </tr>
   );
 };
 
 const SearchResults = props => {
-  const results = props.Searchresults;
-  const resultsField = results.map(res => <rowResult res />);
+  //const searchResults = props.results;
+  var resultsField = props.result.map(res => {
+    // return <rowResult key={res.id} data = {res} />
+    return (
+      <tr>
+        <td>{res.id}</td>
+        <td>{res.title}</td>
+        <td>{res.firstName}</td>
+        <td>{res.surname}</td>
+        <td>{res.email}</td>
+        <td>{res.roomId}</td>
+        <td>{res.checkInDate}</td>
+        <td>{res.checkOutDate}</td>
+        <td>
+          {moment(res.checkOutDate).diff(moment(res.checkInDate), "days")}
+        </td>
+      </tr>
+    );
+  });
   return (
-    <table class="table table-sm">
+    <table className="table table-hover col-5 ml-7">
       <thead>
         <tr>
           <th scope="col">Id </th>
@@ -29,6 +47,7 @@ const SearchResults = props => {
           <th scope="col">Room Id</th>
           <th scope="col">Check In Date</th>
           <th scope="col">Check out Date</th>
+          <th scope="col">Days In</th>
         </tr>
       </thead>
       <tbody>{resultsField}</tbody>
